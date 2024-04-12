@@ -1,14 +1,12 @@
 package com.rafaelaugustor.desapega.domain.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -18,12 +16,12 @@ import java.util.UUID;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID uuid;
 
     private String name;
 
-    private Date birhDate;
+    private Date birthDate;
 
     private String password;
 
@@ -31,6 +29,8 @@ public class User {
 
     private String address;
 
-    private String profilePic;
+    private String profilePicture;
 
+    @OneToMany(mappedBy = "user")
+    private List<Product> products;
 }
