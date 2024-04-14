@@ -29,4 +29,7 @@ public class Transaction {
 
     @ManyToOne
     private User requestedUser;
+
+    @OneToMany(mappedBy = "transaction")
+    private List<ProductTransactionItem> trade;
 }
