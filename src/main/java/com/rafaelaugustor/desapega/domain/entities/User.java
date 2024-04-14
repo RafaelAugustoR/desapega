@@ -20,6 +20,8 @@ public class User {
 
     private String name;
 
+    private String cpf;
+
     private LocalDate birthDate;
 
     private String password;
