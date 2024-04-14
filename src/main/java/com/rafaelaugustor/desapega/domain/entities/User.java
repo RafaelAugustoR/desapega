@@ -9,7 +9,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
-@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -44,4 +43,11 @@ public class User {
     private List<Evaluation> evaluationsReceived;
 
     @OneToMany(mappedBy = "evaluatingUser")
-    private List<Evaluation> evaluationsMade;}
+    private List<Evaluation> evaluationsMade;
+
+    @OneToMany(mappedBy = "receiverSolicitation")
+    private List<Notification> receivedNotifications;
+
+    @OneToMany(mappedBy = "senderSolicitation")
+    private List<Notification> sentNotifications;
+}
