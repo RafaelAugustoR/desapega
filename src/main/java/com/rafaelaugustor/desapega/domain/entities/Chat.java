@@ -22,4 +22,9 @@ public class Chat {
 
     private Instant date;
 
-    }
+    @ManyToOne
+    private User sender;
+
+    @ManyToOne
+    private User receiver;
+}

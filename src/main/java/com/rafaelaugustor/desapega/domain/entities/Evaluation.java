@@ -24,4 +24,9 @@ public class Evaluation {
 
     private Instant date;
 
+    @ManyToOne
+    private User evaluatingUser;
+
+    @ManyToOne
+    private User evaluatedUser;
 }

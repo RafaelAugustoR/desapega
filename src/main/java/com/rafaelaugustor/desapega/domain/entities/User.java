@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,12 +16,12 @@ import java.util.UUID;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID uuid;
 
     private String name;
 
-    private Date birthDate;
+    private LocalDate birthDate;
 
     private String password;
 
@@ -33,4 +33,15 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Product> products;
-}
+
+    @OneToMany(mappedBy = "sender")
+    private List<Chat> messagesSent;
+
+    @OneToMany(mappedBy = "receiver")
+    private List<Chat> messagesReceived;
+
+    @OneToMany(mappedBy = "evaluatedUser")
+    private List<Evaluation> evaluationsReceived;
+
+    @OneToMany(mappedBy = "evaluatingUser")
+    private List<Evaluation> evaluationsMade;}
