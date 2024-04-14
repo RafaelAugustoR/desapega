@@ -21,5 +21,5 @@ public class ProductTransactionItem {
     private Transaction transaction;
 
     @ManyToOne
-    private Product product;
+    private Product itemTransaction;
 }
