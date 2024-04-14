@@ -45,6 +45,12 @@ public class User {
     @OneToMany(mappedBy = "evaluatingUser")
     private List<Evaluation> evaluationsMade;
 
+    @OneToMany(mappedBy = "requester")
+    private List<Transaction> transactionsRequested;
+
+    @OneToMany(mappedBy = "requestedUser")
+    private List<Transaction> transactionsReceived;
+
     @OneToMany(mappedBy = "receiverSolicitation")
     private List<Notification> receivedNotifications;
 
