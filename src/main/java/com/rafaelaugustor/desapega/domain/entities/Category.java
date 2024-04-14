@@ -24,4 +24,7 @@ public class Category {
 
     private String image;
 
+    @OneToMany(mappedBy = "category")
+    private List<Product> products;
+
 }

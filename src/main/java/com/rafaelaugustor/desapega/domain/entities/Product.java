@@ -14,7 +14,7 @@ import java.util.UUID;
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID uuid;
 
     private String name;
@@ -23,7 +23,9 @@ public class Product {
 
     private String image;
 
-
     @ManyToOne
     private User user;
+
+    @ManyToOne
+    private Category category;
 }
