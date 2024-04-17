@@ -18,7 +18,7 @@ public class Evaluation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID uuid;
 
-    private Integer rating;
+    private Double rating;
 
     private String comment;
 
