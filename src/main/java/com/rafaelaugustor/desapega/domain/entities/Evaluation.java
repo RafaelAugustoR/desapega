@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.UUID;
 
@@ -19,7 +20,7 @@ public class Evaluation {
     private UUID uuid;
 
     @Column(precision = 1, scale = 1, nullable = false)
-    private Double rating;
+    private BigDecimal rating;
 
     @Column(columnDefinition = "TEXT")
     private String comment;
