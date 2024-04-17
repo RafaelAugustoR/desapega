@@ -15,7 +15,7 @@ public class ProductTransactionItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID uuid;
+    private UUID id;
 
     @ManyToOne
     private Transaction transaction;

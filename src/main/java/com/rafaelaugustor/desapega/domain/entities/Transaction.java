@@ -18,7 +18,7 @@ public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID uuid;
+    private UUID id;
 
     @Column(nullable = false, insertable = false, updatable = false, columnDefinition = "TIMESTAMP")
     private Instant date;

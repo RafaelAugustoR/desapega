@@ -17,7 +17,7 @@ public class Evaluation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID uuid;
+    private UUID id;
 
     @Column(precision = 1, scale = 1, nullable = false)
     private BigDecimal rating;
