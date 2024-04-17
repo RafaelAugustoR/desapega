@@ -18,8 +18,10 @@ public class Chat {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID uuid;
 
+    @Column(nullable = false)
     private String message;
 
+    @Column(nullable = false, insertable = false, updatable = false, columnDefinition = "TIMESTAMP")
     private Instant date;
 
     @ManyToOne

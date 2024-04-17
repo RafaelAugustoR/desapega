@@ -20,8 +20,10 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID uuid;
 
+    @Column(nullable = false, insertable = false, updatable = false, columnDefinition = "TIMESTAMP")
     private Instant date;
 
+    @Column(nullable = false)
     private TransactionStatus status;
 
     @ManyToOne

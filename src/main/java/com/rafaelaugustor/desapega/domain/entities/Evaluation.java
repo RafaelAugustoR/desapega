@@ -18,10 +18,13 @@ public class Evaluation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID uuid;
 
+    @Column(precision = 1, scale = 1, nullable = false)
     private Double rating;
 
+    @Column(columnDefinition = "TEXT")
     private String comment;
 
+    @Column(nullable = false, insertable = false, updatable = false, columnDefinition = "TIMESTAMP")
     private Instant date;
 
     @ManyToOne

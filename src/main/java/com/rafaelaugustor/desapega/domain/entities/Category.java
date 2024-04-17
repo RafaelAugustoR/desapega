@@ -18,10 +18,13 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID uuid;
 
+    @Column(nullable = false, length = 32)
     private String name;
 
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String description;
 
+    @Column(nullable = false)
     private String image;
 
     @OneToMany(mappedBy = "category")

@@ -19,18 +19,25 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID uuid;
 
+    @Column(length = 80, nullable = false)
     private String name;
 
+    @Column(length = 11, nullable = false, unique = true)
     private String cpf;
 
+    @Column(length = 10, nullable = false)
     private LocalDate birthDate;
 
+    @Column(length = 32, nullable = false)
     private String password;
 
+    @Column(length = 80, nullable = false, unique = true)
     private String email;
 
+    @Column(nullable = false)
     private String address;
 
+    @Column(nullable = false)
     private String profilePicture;
 
     @OneToMany(mappedBy = "user")

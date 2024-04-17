@@ -18,10 +18,13 @@ public class Notification {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID uuid;
 
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String message;
 
+    @Column(nullable = false, insertable = false, updatable = false, columnDefinition = "TIMESTAMP")
     private Instant date;
 
+    @Column(nullable = false)
     private Boolean isViewed;
 
     @ManyToOne

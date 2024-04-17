@@ -18,10 +18,13 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID uuid;
 
+    @Column(length = 150, nullable = false)
     private String name;
 
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String description;
 
+    @Column(nullable = false)
     private String image;
 
     @ManyToOne
