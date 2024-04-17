@@ -63,4 +63,7 @@ public class User {
 
     @OneToMany(mappedBy = "senderSolicitation")
     private List<Notification> sentNotifications;
+
+    @OneToOne
+    private Address address;
 }
