@@ -23,11 +23,11 @@ public class RegisterRequestDTO {
 
     private String password;
 
+    private String confirmPassword;
+
     private String email;
 
     private String profilePicture;
-
-    private UserRole role;
 
     private Address address;
 
