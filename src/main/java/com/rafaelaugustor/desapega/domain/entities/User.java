@@ -2,6 +2,7 @@ package com.rafaelaugustor.desapega.domain.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +14,7 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class User {
 
     @Id
@@ -34,7 +36,7 @@ public class User {
     @Column(length = 80, nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String profilePicture;
 
     @OneToMany(mappedBy = "user")
