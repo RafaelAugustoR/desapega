@@ -2,7 +2,6 @@ package com.rafaelaugustor.desapega.rest.dtos.request;
 
 import com.rafaelaugustor.desapega.domain.entities.Address;
 import com.rafaelaugustor.desapega.domain.entities.User;
-import com.rafaelaugustor.desapega.domain.enums.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
