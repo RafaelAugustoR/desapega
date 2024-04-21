@@ -1,5 +1,6 @@
 package com.rafaelaugustor.desapega.domain.entities;
 
+import com.rafaelaugustor.desapega.domain.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -36,6 +37,9 @@ public class User {
 
     @Column(nullable = true)
     private String profilePicture;
+
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
 
     @OneToMany(mappedBy = "user")
     private List<Product> products;
