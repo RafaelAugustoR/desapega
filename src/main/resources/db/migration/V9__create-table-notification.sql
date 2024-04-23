@@ -3,7 +3,7 @@ CREATE TABLE notification (
     message TEXT NOT NULL,
     date TIMESTAMP NOT NULL,
     is_viewed BOOLEAN NOT NULL,
-    type VARCHAR(20) NOT NULL CHECK(role IN ('CONVERSATION', 'ITEM_REQUEST')),
+    type VARCHAR(20) NOT NULL CHECK(type IN ('CONVERSATION', 'ITEM_REQUEST')),
     sender_solicitation UUID,
     receiver_solicitation UUID,
     transaction_id UUID,
