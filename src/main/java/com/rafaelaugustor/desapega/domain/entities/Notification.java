@@ -1,5 +1,6 @@
 package com.rafaelaugustor.desapega.domain.entities;
 
+import com.rafaelaugustor.desapega.domain.enums.NotificationType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,9 +28,15 @@ public class Notification {
     @Column(nullable = false)
     private Boolean isViewed;
 
+    @Enumerated(EnumType.STRING)
+    private NotificationType type;
+
     @ManyToOne
     private User senderSolicitation;
 
     @ManyToOne
     private User receiverSolicitation;
+
+    @ManyToOne
+    private Transaction transaction;
 }
