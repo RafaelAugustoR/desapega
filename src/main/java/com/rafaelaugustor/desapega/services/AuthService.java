@@ -63,7 +63,7 @@ public class AuthService {
                 .birthDate(request.getBirthDate())
                 .address(userAddress)
                 .password(passwordEncoder.encode(request.getPassword()))
-                .role(UserRole.COSTUMER)
+                .role(UserRole.CUSTOMER)
                 .build();
 
         userRepository.save(userToSave);

@@ -6,8 +6,9 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum NotificationType {
-    MESSAGE("Message"),
-    REQUEST("Request")
-    ;
+
+    CONVERSATION("CONVERSATION"),
+    ITEM_REQUEST("ITEM_REQUEST");
+
     private final String type;
 }

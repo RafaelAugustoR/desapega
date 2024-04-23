@@ -7,10 +7,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum TransactionStatus {
 
-    AVAILABLE("Disponível"),
-    IN_EXCHANGE("Em processo"),
-    COMPLETED("Finalizado"),
-    CANCELED("Cancelado");
+    AVAILABLE("AVAILABLE"),
+    IN_EXCHANGE("IN_EXCHANGE"),
+    COMPLETED("COMPLETED"),
+    CANCELED("CANCELED");
 
     private final String status;
 }
