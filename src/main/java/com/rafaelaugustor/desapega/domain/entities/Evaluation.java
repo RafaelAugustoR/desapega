@@ -29,8 +29,10 @@ public class Evaluation {
     private Instant date;
 
     @ManyToOne
+    @JoinColumn(name = "evaluating_user_id")
     private User evaluatingUser;
 
     @ManyToOne
+    @JoinColumn(name = "evaluated_user_id")
     private User evaluatedUser;
 }
