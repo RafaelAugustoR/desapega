@@ -16,7 +16,7 @@ public class RegisterRequestDTO {
 
     private String name;
 
-    private String cpf;
+    private Integer cpf;
 
     private LocalDate birthDate;
 
