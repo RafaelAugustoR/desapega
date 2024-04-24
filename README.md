@@ -5,7 +5,3 @@ Bem-vindo ao projeto Desapega! Este é um sistema de trocas de produtos entre us
 ## Sobre o Projeto 
 
 O Desapega é um projeto desenvolvido como trabalho de conclusão de curso (TCC) para o curso técnico em informática integrado ao ensino médio na escola CEDUP ABILIO PAULO. O objetivo do projeto é criar uma plataforma online para facilitar a troca de produtos entre usuários, promovendo a reutilização e sustentabilidade. Lembrando que este é um projeto em desenvolvimento, qualquer contribuição ou observação é bem vinda!
-
-Observações:
-
-- Ainda pretendo renomear algumas variáveis e ainda não decidi como vou trabalhar acerca das imagens nem em questão do endereço do usuário
