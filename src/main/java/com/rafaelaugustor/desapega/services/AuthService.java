@@ -29,12 +29,15 @@ public class AuthService {
     private final TokenService tokenService;
 
     public LoginResponseDTO login(LoginRequestDTO request){
-        var usernamePassword = new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword());
+        UsernamePasswordAuthenticationToken usernamePassword = new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword());
 
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
         var token = tokenService.generateToken((User) auth.getPrincipal());
-        return new LoginResponseDTO(token);
+
+        return LoginResponseDTO.builder()
+                .token(token)
+                .build();
     }
 
     public void register(RegisterRequestDTO request){
