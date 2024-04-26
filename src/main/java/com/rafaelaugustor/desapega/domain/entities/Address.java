@@ -29,7 +29,7 @@ public class Address {
 
     private String street;
 
-    private Integer postalCode;
+    private String postalCode;
 
     private Integer houseNumber;
 

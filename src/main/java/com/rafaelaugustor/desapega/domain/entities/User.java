@@ -27,8 +27,8 @@ public class User implements UserDetails {
     @Column(length = 80, nullable = false)
     private String name;
 
-    @Column(length = 11, nullable = false, unique = true)
-    private Integer cpf;
+    @Column(length = 15, nullable = false, unique = true)
+    private String cpf;
 
     @Column(length = 10, nullable = false)
     private LocalDate birthDate;
