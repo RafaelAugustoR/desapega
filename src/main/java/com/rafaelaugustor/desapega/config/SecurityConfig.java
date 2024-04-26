@@ -1,5 +1,6 @@
 package com.rafaelaugustor.desapega.config;
 
+import com.rafaelaugustor.desapega.domain.enums.UserRole;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -39,8 +40,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST, "api/auth/register").permitAll()
                         .requestMatchers(HttpMethod.POST, "api/auth/login").permitAll()
-                        .requestMatchers(HttpMethod.POST, "api/categories").authenticated()
-                        .requestMatchers(HttpMethod.DELETE, "api/categories/{id}").authenticated()
+                        .requestMatchers(HttpMethod.POST, "api/categories").hasRole(UserRole.ADMIN.getRole())
+                        .requestMatchers(HttpMethod.DELETE, "api/categories/{id}").hasRole(UserRole.ADMIN.getRole())
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
