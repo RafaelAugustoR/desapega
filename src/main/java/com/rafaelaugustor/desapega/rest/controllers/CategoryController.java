@@ -1,8 +1,11 @@
 package com.rafaelaugustor.desapega.rest.controllers;
 
 import com.rafaelaugustor.desapega.rest.dtos.request.CategoryRequestDTO;
+import com.rafaelaugustor.desapega.rest.dtos.response.CategoryResponseDTO;
 import com.rafaelaugustor.desapega.services.CategoryService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,4 +31,11 @@ public class CategoryController {
         service.deleteCategory(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("")
+    public ResponseEntity<Page<CategoryResponseDTO>> findAllCategories(Pageable pageable){
+        var response = service.findAllCategories(pageable);
+        return ResponseEntity.ok(response);
+    }
+
 }
