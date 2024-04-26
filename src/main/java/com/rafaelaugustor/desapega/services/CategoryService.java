@@ -28,5 +28,7 @@ public class CategoryService {
 
     }
 
-
+    public void deleteCategory(UUID id){
+        repository.deleteById(id);
+    }
 }
