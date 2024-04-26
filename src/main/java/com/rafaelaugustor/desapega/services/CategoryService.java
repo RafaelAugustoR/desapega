@@ -5,9 +5,10 @@ import com.rafaelaugustor.desapega.repositories.CategoryRepository;
 import com.rafaelaugustor.desapega.rest.dtos.request.CategoryRequestDTO;
 import com.rafaelaugustor.desapega.rest.dtos.response.CategoryResponseDTO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -30,5 +31,13 @@ public class CategoryService {
 
     public void deleteCategory(UUID id){
         repository.deleteById(id);
+    }
+
+    public Page<CategoryResponseDTO> findAllCategories(Pageable page){
+
+        Page<Category> response = repository.findAll(page);
+
+        return response.map(CategoryResponseDTO::new);
+
     }
 }
