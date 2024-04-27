@@ -3,8 +3,8 @@ CREATE TABLE evaluation(
     rating DECIMAL(1, 1) NOT NULL,
     comment TEXT NOT NULL,
     date TIMESTAMP NOT NULL,
-    evaluating_user UUID,
-    evaluated_user UUID,
-    FOREIGN KEY (evaluating_user_id) REFERENCES user (id),
-    FOREIGN KEY (evaluated_user_id) REFERENCES user (id)
+    evaluating_user_id UUID,
+    evaluated_user_id UUID,
+    FOREIGN KEY (evaluating_user_id) REFERENCES "user" (id),
+    FOREIGN KEY (evaluated_user_id) REFERENCES "user" (id)
 );
