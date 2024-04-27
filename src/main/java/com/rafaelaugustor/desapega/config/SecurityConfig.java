@@ -40,9 +40,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST, "api/auth/register").permitAll()
                         .requestMatchers(HttpMethod.POST, "api/auth/login").permitAll()
+                        .requestMatchers(HttpMethod.GET, "api/categories").permitAll()
+                        .requestMatchers(HttpMethod.GET, "api/categories/{id}").permitAll()
                         .requestMatchers(HttpMethod.POST, "api/categories").hasRole(UserRole.ADMIN.getRole())
                         .requestMatchers(HttpMethod.DELETE, "api/categories/{id}").hasRole(UserRole.ADMIN.getRole())
-                        .requestMatchers(HttpMethod.GET, "api/categories").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
