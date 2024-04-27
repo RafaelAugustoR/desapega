@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -38,6 +39,22 @@ public class CategoryService {
         Page<Category> response = repository.findAll(page);
 
         return response.map(CategoryResponseDTO::new);
+
+    }
+
+    public CategoryResponseDTO findCategoryById(UUID id){
+
+        Optional<Category> category = repository.findById(id);
+
+        if (category.isEmpty()){
+            throw new RuntimeException("EROR");
+        }
+
+        return CategoryResponseDTO.builder()
+                .name(category.get().getName())
+                .description(category.get().getDescription())
+                .image(category.get().getImage())
+                .build();
 
     }
 }
