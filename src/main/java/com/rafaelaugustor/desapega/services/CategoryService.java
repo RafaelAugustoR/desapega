@@ -44,16 +44,14 @@ public class CategoryService {
 
     public CategoryResponseDTO findCategoryById(UUID id){
 
-        Optional<Category> category = repository.findById(id);
+        Category category = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Category not found"));
 
-        if (category.isEmpty()){
-            throw new RuntimeException("EROR");
-        }
 
         return CategoryResponseDTO.builder()
-                .name(category.get().getName())
-                .description(category.get().getDescription())
-                .image(category.get().getImage())
+                .name(category.getName())
+                .description(category.getDescription())
+                .image(category.getImage())
                 .build();
 
     }
