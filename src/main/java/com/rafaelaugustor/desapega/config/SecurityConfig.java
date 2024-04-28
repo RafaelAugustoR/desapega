@@ -43,6 +43,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "api/categories").permitAll()
                         .requestMatchers(HttpMethod.GET, "api/categories/{id}").permitAll()
                         .requestMatchers(HttpMethod.POST, "api/categories").hasRole(UserRole.ADMIN.getRole())
+                        .requestMatchers(HttpMethod.PUT, "api/categories/{id}").hasRole(UserRole.ADMIN.getRole())
                         .requestMatchers(HttpMethod.DELETE, "api/categories/{id}").hasRole(UserRole.ADMIN.getRole())
                         .anyRequest().authenticated()
                 )
