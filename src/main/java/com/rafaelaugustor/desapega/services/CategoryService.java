@@ -55,4 +55,17 @@ public class CategoryService {
                 .build();
 
     }
+
+    public void updateCategory(UUID id, CategoryRequestDTO request){
+
+        Category category = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Category not found"));
+
+        category.setName(request.getName());
+        category.setDescription(request.getDescription());
+        category.setImage(request.getImage());
+
+        repository.save(category);
+    }
+
 }
