@@ -48,6 +48,9 @@ public class User implements UserDetails {
     @OneToOne
     private Address address;
 
+    @OneToOne(mappedBy = "user")
+    private ForgotPassword forgotPassword;
+
     @OneToMany(mappedBy = "user")
     private List<Product> products;
 
