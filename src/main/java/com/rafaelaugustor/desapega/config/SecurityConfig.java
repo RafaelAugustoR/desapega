@@ -45,6 +45,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "api/categories").hasRole(UserRole.ADMIN.getRole())
                         .requestMatchers(HttpMethod.PUT, "api/categories/{id}").hasRole(UserRole.ADMIN.getRole())
                         .requestMatchers(HttpMethod.DELETE, "api/categories/{id}").hasRole(UserRole.ADMIN.getRole())
+                        .requestMatchers(HttpMethod.POST, "api/email").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
