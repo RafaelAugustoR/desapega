@@ -1,10 +1,13 @@
 package com.rafaelaugustor.desapega.services;
 
 import com.rafaelaugustor.desapega.domain.entities.Address;
+import com.rafaelaugustor.desapega.domain.entities.ForgotPassword;
 import com.rafaelaugustor.desapega.domain.entities.User;
 import com.rafaelaugustor.desapega.domain.enums.UserRole;
 import com.rafaelaugustor.desapega.repositories.AddressRepository;
+import com.rafaelaugustor.desapega.repositories.ForgotPasswordRepository;
 import com.rafaelaugustor.desapega.repositories.UserRepository;
+import com.rafaelaugustor.desapega.rest.dtos.request.EmailRequestDTO;
 import com.rafaelaugustor.desapega.rest.dtos.request.LoginRequestDTO;
 import com.rafaelaugustor.desapega.rest.dtos.request.RegisterRequestDTO;
 import com.rafaelaugustor.desapega.rest.dtos.response.LoginResponseDTO;
@@ -14,15 +17,22 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+import java.util.Random;
+
 @Service
 @RequiredArgsConstructor
 public class AuthService {
 
     private final UserRepository userRepository;
 
+    private final AddressRepository addressRepository;
+
+    private final ForgotPasswordRepository forgotPasswordRepository;
+
     private final PasswordEncoder passwordEncoder;
 
-    private final AddressRepository addressRepository;
+    private final EmailService emailService;
 
     private final AuthenticationManager authenticationManager;
 
@@ -70,6 +80,29 @@ public class AuthService {
                 .build();
 
         userRepository.save(userToSave);
+    }
+
+    public void verifyEmail(String email){
+        User user = userRepository.findByEmail(email);
+
+        Random random = new Random();
+
+        int otp = random.nextInt(100_000, 999_999);
+
+        EmailRequestDTO request = EmailRequestDTO.builder()
+                .to(email)
+                .subject("OTP - Recovery password")
+                .text("This is your OTP for your Recovery Password request" + otp)
+                .build();
+
+        ForgotPassword fp = ForgotPassword.builder()
+                .otp(otp)
+                .expirationTime(new Date(System.currentTimeMillis() + 70 * 1000))
+                .user(user)
+                .build();
+
+        emailService.simpleMailMessage(request);
+        forgotPasswordRepository.save(fp);
     }
 
 }
