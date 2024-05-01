@@ -9,19 +9,22 @@ import com.rafaelaugustor.desapega.repositories.ForgotPasswordRepository;
 import com.rafaelaugustor.desapega.repositories.UserRepository;
 import com.rafaelaugustor.desapega.rest.dtos.request.EmailRequestDTO;
 import com.rafaelaugustor.desapega.rest.dtos.request.LoginRequestDTO;
+import com.rafaelaugustor.desapega.rest.dtos.request.RecoveryPasswordRequestDTO;
 import com.rafaelaugustor.desapega.rest.dtos.request.RegisterRequestDTO;
 import com.rafaelaugustor.desapega.rest.dtos.response.LoginResponseDTO;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.time.Instant;
 import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class AuthService {
 
     private final UserRepository userRepository;
@@ -66,7 +69,7 @@ public class AuthService {
         addressRepository.save(userAddress);
 
         if (!request.getPassword().equals(request.getConfirmPassword())){
-            throw new RuntimeException();
+            throw new RuntimeException("Password don't matches");
         }
 
         User userToSave = User.builder()
@@ -92,17 +95,34 @@ public class AuthService {
         EmailRequestDTO request = EmailRequestDTO.builder()
                 .to(email)
                 .subject("OTP - Recovery password")
-                .text("This is your OTP for your Recovery Password request" + otp)
+                .text("This is your OTP for your Recovery Password request: " + otp)
                 .build();
 
         ForgotPassword fp = ForgotPassword.builder()
                 .otp(otp)
-                .expirationTime(new Date(System.currentTimeMillis() + 70 * 1000))
+                .expirationTime(Instant.now().plusSeconds(300))
                 .user(user)
                 .build();
 
-        emailService.simpleMailMessage(request);
+        emailService.sendEmail(request);
         forgotPasswordRepository.save(fp);
+    }
+
+    public void verifyOtp(Integer otp, String email){
+        User user = userRepository.findByEmail(email);
+
+        ForgotPassword fp = forgotPasswordRepository.findByOtpAndUser(otp, user)
+                .orElseThrow(() -> new RuntimeException("Invalid OTP for email" + email));
+
+        if (isOtpExpired(fp)) {
+            forgotPasswordRepository.deleteById(fp.getId());
+            log.info("OTP FOR {} has been expired", user.getEmail());
+        }
+
+    }
+
+    private boolean isOtpExpired(ForgotPassword fp) {
+        return fp.getExpirationTime().isBefore(Instant.now());
     }
 
 }
