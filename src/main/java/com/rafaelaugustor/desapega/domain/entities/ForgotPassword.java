@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.Instant;
 import java.util.Date;
 import java.util.UUID;
 
@@ -24,7 +25,7 @@ public class ForgotPassword {
     private Integer otp;
 
     @Column(nullable = false)
-    private Date expirationTime;
+    private Instant expirationTime;
 
     @OneToOne
     private User user;
