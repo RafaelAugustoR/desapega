@@ -68,7 +68,7 @@ public class AuthService {
 
         addressRepository.save(userAddress);
 
-        if (!request.getPassword().equals(request.getConfirmPassword())){
+        if (!arePasswordEquals(request.getPassword(), request.getConfirmPassword())){
             throw new RuntimeException("Password don't matches");
         }
 
@@ -125,4 +125,17 @@ public class AuthService {
         return fp.getExpirationTime().isBefore(Instant.now());
     }
 
+    public void changePassword(RecoveryPasswordRequestDTO request, String email){
+
+        if(!arePasswordEquals(request.getPassword(), request.getConfirmPassword())){
+            throw new RuntimeException("Password don´t matches");
+        }
+
+        userRepository.updatePassword(email, passwordEncoder.encode(request.getPassword()));
+
+    }
+
+    private boolean arePasswordEquals(String password, String confirmPassword){
+        return password.equals(confirmPassword);
+    }
 }
