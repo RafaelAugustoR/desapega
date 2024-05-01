@@ -12,7 +12,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
-@Entity(name = "\"USER\"")
+@Entity
+@Table(name = "\"USER\"")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
