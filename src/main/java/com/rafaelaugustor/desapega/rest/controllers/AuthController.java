@@ -1,6 +1,7 @@
 package com.rafaelaugustor.desapega.rest.controllers;
 
 import com.rafaelaugustor.desapega.rest.dtos.request.LoginRequestDTO;
+import com.rafaelaugustor.desapega.rest.dtos.request.RecoveryPasswordRequestDTO;
 import com.rafaelaugustor.desapega.rest.dtos.request.RegisterRequestDTO;
 import com.rafaelaugustor.desapega.rest.dtos.response.LoginResponseDTO;
 import com.rafaelaugustor.desapega.services.AuthService;
@@ -29,10 +30,22 @@ public class AuthController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/recovery-password")
+    @PostMapping("/recovery-password/{email}")
     public ResponseEntity<String> verifyEmail(@PathVariable String email){
         authService.verifyEmail(email);
         return ResponseEntity.ok("Email sent for verification!");
+    }
+
+    @PostMapping("/verify-otp/{otp}/{email}")
+    public ResponseEntity<String> verifyOtp(@PathVariable Integer otp, @PathVariable String email){
+        authService.verifyOtp(otp, email);
+        return ResponseEntity.ok("OTP verified!");
+    }
+
+    @PostMapping("/change-password/{email}")
+    public ResponseEntity<String> changePassword(@RequestBody RecoveryPasswordRequestDTO request, @PathVariable String email){
+        authService.changePassword(request, email);
+        return ResponseEntity.ok("Password has been changed!");
     }
 
 }
