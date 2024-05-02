@@ -1,15 +1,11 @@
 package com.rafaelaugustor.desapega.services;
 
 import com.rafaelaugustor.desapega.domain.entities.Address;
-import com.rafaelaugustor.desapega.domain.entities.ForgotPassword;
 import com.rafaelaugustor.desapega.domain.entities.User;
 import com.rafaelaugustor.desapega.domain.enums.UserRole;
 import com.rafaelaugustor.desapega.repositories.AddressRepository;
-import com.rafaelaugustor.desapega.repositories.ForgotPasswordRepository;
 import com.rafaelaugustor.desapega.repositories.UserRepository;
-import com.rafaelaugustor.desapega.rest.dtos.request.EmailRequestDTO;
 import com.rafaelaugustor.desapega.rest.dtos.request.LoginRequestDTO;
-import com.rafaelaugustor.desapega.rest.dtos.request.RecoveryPasswordRequestDTO;
 import com.rafaelaugustor.desapega.rest.dtos.request.RegisterRequestDTO;
 import com.rafaelaugustor.desapega.rest.dtos.response.LoginResponseDTO;
 import lombok.RequiredArgsConstructor;
@@ -18,9 +14,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.time.Instant;
-import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
