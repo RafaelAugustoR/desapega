@@ -31,12 +31,7 @@ public class AuthService {
 
     private final AddressRepository addressRepository;
 
-    private final ForgotPasswordRepository forgotPasswordRepository;
-
     private final PasswordEncoder passwordEncoder;
-
-    private final EmailService emailService;
-
     private final AuthenticationManager authenticationManager;
 
     private final TokenService tokenService;
@@ -68,7 +63,7 @@ public class AuthService {
 
         addressRepository.save(userAddress);
 
-        if (!arePasswordEquals(request.getPassword(), request.getConfirmPassword())){
+        if (!request.getPassword().equals(request.getConfirmPassword())){
             throw new RuntimeException("Password don't matches");
         }
 
@@ -85,57 +80,4 @@ public class AuthService {
         userRepository.save(userToSave);
     }
 
-    public void verifyEmail(String email){
-        User user = userRepository.findByEmail(email);
-
-        Random random = new Random();
-
-        int otp = random.nextInt(100_000, 999_999);
-
-        EmailRequestDTO request = EmailRequestDTO.builder()
-                .to(email)
-                .subject("OTP - Recovery password")
-                .text("This is your OTP for your Recovery Password request: " + otp)
-                .build();
-
-        ForgotPassword fp = ForgotPassword.builder()
-                .otp(otp)
-                .expirationTime(Instant.now().plusSeconds(300))
-                .user(user)
-                .build();
-
-        emailService.sendEmail(request);
-        forgotPasswordRepository.save(fp);
-    }
-
-    public void verifyOtp(Integer otp, String email){
-        User user = userRepository.findByEmail(email);
-
-        ForgotPassword fp = forgotPasswordRepository.findByOtpAndUser(otp, user)
-                .orElseThrow(() -> new RuntimeException("Invalid OTP for email" + email));
-
-        if (isOtpExpired(fp)) {
-            forgotPasswordRepository.deleteById(fp.getId());
-            log.info("OTP FOR {} has been expired", user.getEmail());
-        }
-
-    }
-
-    private boolean isOtpExpired(ForgotPassword fp) {
-        return fp.getExpirationTime().isBefore(Instant.now());
-    }
-
-    public void changePassword(RecoveryPasswordRequestDTO request, String email){
-
-        if(!arePasswordEquals(request.getPassword(), request.getConfirmPassword())){
-            throw new RuntimeException("Password don´t matches");
-        }
-
-        userRepository.updatePassword(email, passwordEncoder.encode(request.getPassword()));
-
-    }
-
-    private boolean arePasswordEquals(String password, String confirmPassword){
-        return password.equals(confirmPassword);
-    }
 }
