@@ -1,6 +1,7 @@
 package com.rafaelaugustor.desapega.domain.entities;
 
 import com.rafaelaugustor.desapega.domain.enums.UserRole;
+import com.rafaelaugustor.desapega.domain.enums.UserStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -42,6 +43,9 @@ public class User implements UserDetails {
 
     @Column(nullable = true)
     private String profilePicture;
+
+    @Enumerated(EnumType.STRING)
+    private UserStatus status;
 
     @Enumerated(EnumType.STRING)
     private UserRole role;
