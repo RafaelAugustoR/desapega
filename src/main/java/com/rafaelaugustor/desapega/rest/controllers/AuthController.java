@@ -6,10 +6,7 @@ import com.rafaelaugustor.desapega.rest.dtos.response.LoginResponseDTO;
 import com.rafaelaugustor.desapega.services.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static com.rafaelaugustor.desapega.utils.Constants.APP_ROOT;
 
@@ -30,6 +27,12 @@ public class AuthController {
     public ResponseEntity<Void> register(@RequestBody RegisterRequestDTO request) {
         this.authService.register(request);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/confirm-email")
+    public ResponseEntity<String> confirmEmail(@RequestParam String email) {
+        this.authService.confirmEmail(email);
+        return ResponseEntity.ok("Email confirmed successfully!");
     }
 
 }

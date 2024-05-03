@@ -1,0 +1,4 @@
+ALTER TABLE "user"
+ADD COLUMN status TYPE VARCHAR(15)
+    USING status::VARCHAR(15),
+    ADD CONSTRAINT check_status CHECK (status IN ('ACTIVE', 'INACTIVE', 'PENDING'));
