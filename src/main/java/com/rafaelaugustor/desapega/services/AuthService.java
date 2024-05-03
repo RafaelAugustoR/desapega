@@ -94,9 +94,7 @@ public class AuthService {
     public void confirmEmail(String email){
 
         User user = userRepository.findByEmail(email);
-
         user.setStatus(UserStatus.ACTIVE);
-
         userRepository.save(user);
 
     }
