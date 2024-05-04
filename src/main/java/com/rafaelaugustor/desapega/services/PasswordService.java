@@ -1,5 +1,6 @@
 package com.rafaelaugustor.desapega.services;
 
+import com.rafaelaugustor.desapega.broker.producers.EmailProducer;
 import com.rafaelaugustor.desapega.domain.entities.ForgotPassword;
 import com.rafaelaugustor.desapega.domain.entities.User;
 import com.rafaelaugustor.desapega.repositories.ForgotPasswordRepository;
@@ -26,7 +27,7 @@ public class PasswordService {
 
     private final PasswordEncoder passwordEncoder;
 
-    private final EmailService emailService;
+    private final EmailProducer producer;
 
     public void verifyEmail(String email){
         User user = userRepository.findByEmail(email);
@@ -35,7 +36,7 @@ public class PasswordService {
 
         int otp = random.nextInt(100_000, 999_999);
 
-        EmailRequestDTO request = EmailRequestDTO.builder()
+        EmailRequestDTO recoveryPasswordEmail = EmailRequestDTO.builder()
                 .to(email)
                 .subject("OTP - Recovery password")
                 .text("This is your OTP for your Recovery Password request: " + otp)
@@ -47,7 +48,7 @@ public class PasswordService {
                 .user(user)
                 .build();
 
-        emailService.sendEmail(request);
+        producer.sendConfirmationEmail(recoveryPasswordEmail);
         forgotPasswordRepository.save(fp);
     }
 
