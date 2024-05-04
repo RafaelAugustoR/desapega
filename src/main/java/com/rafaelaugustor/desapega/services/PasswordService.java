@@ -49,6 +49,9 @@ public class PasswordService {
                 .build();
 
         producer.sendConfirmationEmail(recoveryPasswordEmail);
+
+        log.info("Sent email with otp request to {} ", email);
+
         forgotPasswordRepository.save(fp);
     }
 
@@ -62,7 +65,6 @@ public class PasswordService {
             forgotPasswordRepository.deleteById(fp.getId());
             log.info("OTP FOR {} has been expired", user.getEmail());
         }
-
     }
 
     private boolean isOtpExpired(ForgotPassword fp) {
