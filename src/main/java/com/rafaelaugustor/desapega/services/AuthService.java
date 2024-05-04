@@ -1,5 +1,6 @@
 package com.rafaelaugustor.desapega.services;
 
+import com.rafaelaugustor.desapega.broker.producers.EmailProducer;
 import com.rafaelaugustor.desapega.domain.entities.Address;
 import com.rafaelaugustor.desapega.domain.entities.User;
 import com.rafaelaugustor.desapega.domain.enums.UserRole;
@@ -24,9 +25,9 @@ public class AuthService {
 
     private final UserRepository userRepository;
 
-    private final AddressRepository addressRepository;
+    private final EmailProducer producer;
 
-    private final EmailService emailService;
+    private final AddressRepository addressRepository;
 
     private final PasswordEncoder passwordEncoder;
 
@@ -88,7 +89,8 @@ public class AuthService {
                 .subject("Desapega - confirm your email")
                 .text("This is the link to confirm your email and complete your registration! https://desapega.com.br/confirm-email/" + request.getEmail().toLowerCase())
                 .build();
-        emailService.sendEmail(confirmUserEmail);
+
+        producer.sendConfirmationEmail(confirmUserEmail);
     }
 
     public void confirmEmail(String email){
