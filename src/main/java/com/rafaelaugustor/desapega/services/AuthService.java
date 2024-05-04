@@ -47,6 +47,8 @@ public class AuthService {
 
         var token = tokenService.generateToken((User) auth.getPrincipal());
 
+        log.info("User with email {} has been logged, token generated: {}", user.getEmail(), token);
+
         return LoginResponseDTO.builder()
                 .token(token)
                 .build();
@@ -91,14 +93,17 @@ public class AuthService {
                 .build();
 
         producer.sendConfirmationEmail(confirmUserEmail);
+
+        log.info("Sent request confirmation to {}", request.getEmail());
     }
 
-    public void confirmEmail(String email){
+    public void confirmEmail(String email) {
 
         User user = userRepository.findByEmail(email);
         user.setStatus(UserStatus.ACTIVE);
         userRepository.save(user);
 
+        log.info("User with email: {} has been confirmed", email);
     }
 
 }

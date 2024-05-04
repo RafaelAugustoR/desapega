@@ -5,6 +5,7 @@ import com.rafaelaugustor.desapega.repositories.CategoryRepository;
 import com.rafaelaugustor.desapega.rest.dtos.request.CategoryRequestDTO;
 import com.rafaelaugustor.desapega.rest.dtos.response.CategoryResponseDTO;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class CategoryService {
 
     private final CategoryRepository repository;
@@ -27,6 +29,7 @@ public class CategoryService {
 
         repository.save(categoryToSave);
 
+        log.info("Category {} has been created", request.getName());
     }
 
     public void deleteCategory(UUID id){
@@ -65,6 +68,8 @@ public class CategoryService {
         category.setImage(request.getImage());
 
         repository.save(category);
+
+        log.info("Category {} has been updated", request.getName());
     }
 
 }
