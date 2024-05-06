@@ -23,7 +23,7 @@ O Desapega é um projeto desenvolvido como trabalho de conclusão de curso (TCC)
 │       │               │   ├── entities
 │       │               │   └── enums
 │       │               ├── rest
-│       │               │   ├── controllers
+│       │               │   ├── controllers 
 │       │               │   └── dtos
 │       │               │       ├── request
 │       │               │       └── response
@@ -38,8 +38,7 @@ O Desapega é um projeto desenvolvido como trabalho de conclusão de curso (TCC)
 ├── target
 ├── mvnw
 ├── mvnw.cmd
-├── pom.xml
-└── README.md
+└── pom.xml
 
 ```
 
@@ -64,3 +63,10 @@ A arquitetura do projeto segue uma estrutura em camadas típica, consistindo nos
 - `src/main/resources/db/migration`: Contém os arquivos de migração do banco de dados, usados para versionar e manter o esquema do banco de dados.
 
 Além disso, existem outros arquivos e diretórios, como arquivos de licença, arquivos de construção e README. No geral, a arquitetura do projeto é clara, com responsabilidades claras para cada módulo, facilitando o entendimento e a manutenção.
+
+## Tecnologias Utilizadas
+
+- **Spring Framework**
+- **RabbitMQ**
+- **PostgreSQL**
+- **H2**
