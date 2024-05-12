@@ -42,7 +42,7 @@ public class UserService {
         log.info("User {} has been updated", user.getEmail());
     }
 
-    public void delete(UserRequestDTO request, Principal principal){
+    public void delete(Principal principal){
         User user = repository.findByEmail(principal.getName());
         repository.delete(user);
     }
