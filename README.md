@@ -4,7 +4,7 @@ Bem-vindo ao projeto Desapega! Este é um sistema de trocas de produtos entre us
 
 ## Sobre o Projeto 
 
-O Desapega é um projeto desenvolvido como trabalho de conclusão de curso (TCC) para o curso técnico em informática integrado ao ensino médio na escola CEDUP ABILIO PAULO. O objetivo do projeto é criar uma plataforma online para facilitar a troca de produtos entre usuários, promovendo a reutilização e sustentabilidade. Lembrando que este é um projeto em desenvolvimento, qualquer contribuição ou observação é bem vinda!
+O Desapega é um projeto desenvolvido como projeto pessoal. O objetivo do projeto é criar uma plataforma online para facilitar a troca de produtos entre usuários, promovendo a reutilização e sustentabilidade. Lembrando que este é um projeto em desenvolvimento, qualquer contribuição ou observação é bem vinda!
 
 ## Estrutura de Pastas
 ```
@@ -44,7 +44,6 @@ O Desapega é um projeto desenvolvido como trabalho de conclusão de curso (TCC)
 
 A arquitetura do projeto segue uma estrutura em camadas típica, consistindo nos seguintes módulos:
 
-- `src/main/java/com/rafaelaugustor/desapega`: Este é o diretório raiz do código-fonte Java da sua aplicação.
     - `broker`: Contém os módulos relacionados ao RabbitMQ, como consumidores e produtores.
         - `consumers`: Contém os consumidores que recebem mensagens do RabbitMQ.
         - `producers`: Contém os produtores que enviam mensagens para o RabbitMQ.
